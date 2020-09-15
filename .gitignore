@@ -1,0 +1,12 @@
+*.pyc
+.idea*
+dist/
+.terraform
+terraform*
+env
+.vscode
+build/
+*.zip
+.pytest_cache/
+venv
+pkg
