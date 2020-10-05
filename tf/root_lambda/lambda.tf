@@ -4,21 +4,21 @@ resource "aws_lambda_function" "lambda" {
   role             = aws_iam_role.lambda_role.arn
   source_code_hash = base64sha256(data.local_file.pkg_file.content)
   handler          = var.handler
-  runtime          = "python3.7"
+  runtime          = var.runtime
   memory_size      = var.memory_size
   timeout          = var.timeout
-  
+
   environment {
-    variables =  {
-    DEBUG = "false"
-  }
+    variables = {
+      DEBUG = "false"
+    }
   }
 
   tags = var.tags
 
   file_system_config {
-    arn = aws_efs_access_point.access_point_for_lambda.arn
-    local_mount_path = "/mnt/lambda"
+    arn              = aws_efs_access_point.access_point_for_lambda.arn
+    local_mount_path = "/mnt/cern_root"
   }
 
   vpc_config {
@@ -81,7 +81,6 @@ EOF
 data "aws_iam_policy" "VPC" {
   arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
 }
-
 
 resource "aws_iam_role_policy_attachment" "VPC_Attachment" {
   role       = aws_iam_role.lambda_role.name

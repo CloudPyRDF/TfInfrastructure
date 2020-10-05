@@ -4,9 +4,9 @@ resource "aws_vpc" "main" {
 }
 
 resource "aws_subnet" "efs_root" {
-  vpc_id            = aws_vpc.main.id
+  vpc_id = aws_vpc.main.id
   # availability_zone = "us-west-2a"
-  cidr_block        = "10.0.1.0/24"
+  cidr_block = "10.0.1.0/24"
 }
 
 # resource "aws_default_subnet" "default_az1" {
