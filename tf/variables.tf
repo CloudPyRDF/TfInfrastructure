@@ -7,26 +7,73 @@ variable "region" {
 }
 
 variable "lambda_name" {
-  default = "basic_lambda"
+  default = "eos-lambda"
 }
 
-variable "lambda_memory_size" {
+variable "eos_lambda_memory_size" {
   default = 128
 }
 
-variable "lambda_timeout" {
+variable "eos_lambda_timeout" {
   default = 120
 }
 
-variable "lambda_pkg_filename" {
-  default = "pkg/lambda.zip"
+variable "eos_lambda_pkg_filename" {
+  default = "pkg/eos-lambda.zip"
 }
 
-variable "lambda_handler" {
-  default = "handler.lambda_handler"
+variable "eos_lambda_handler" {
+  default = "lambda.lambda_handler"
 }
 
-variable "tags" {
+variable "eos_login" {
+  type = string
+}
+variable "eos_password" {
+  type = string
+}
+variable "eos_lambda_tags" {
   type    = map
   default = {}
+}
+
+variable "eos_lambda_config" {
+  default = {
+    DEBUG = "false"
+  }
+}
+
+####################################################
+### VARS FOR LAMBDA FOR INITIALIZING ROOT ON EFS ###
+####################################################
+
+variable "init_lambda_name" {
+  default = "init_lambda"
+}
+
+variable "init_lambda_memory_size" {
+  default = 128
+}
+
+variable "init_lambda_timeout" {
+  default = 120
+}
+
+variable "init_lambda_pkg_filename" {
+  default = "pkg/init_lambda.zip"
+}
+
+variable "init_lambda_handler" {
+  default = "lambda.lambda_handler"
+}
+
+variable "init_lambda_tags" {
+  type    = map
+  default = {}
+}
+variable "init_lambda_config" {
+  type    = map
+  default = {
+    DEBUG = "false"
+  }
 }
