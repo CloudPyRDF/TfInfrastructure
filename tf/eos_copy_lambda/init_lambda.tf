@@ -3,12 +3,12 @@
 
 #   input = <<JSON
 # {
-#   "path": "user/j/jkusnier/DQM/",
-#   "resource": "new.root",
+#   "path": "user/j/jkusnier/AWS_ROOT/",
+#   "resource": "aws_root.zip",
 #   "login": "${var.eos_login}",
 #   "password": "${var.eos_password}",
-#   "bucket_name": "${aws_s3_bucket.input_bucket.bucket}",
-#   "object_key": "test.root"
+#   "bucket_name": "${var.input_bucket}",
+#   "object_key": "aws_root.zip"
 # }
 # JSON
 # }

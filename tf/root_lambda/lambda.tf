@@ -17,7 +17,7 @@ resource "aws_lambda_function" "lambda" {
   tags = var.tags
 
   file_system_config {
-    arn              = aws_efs_access_point.access_point_for_lambda.arn
+    arn              = var.efs.arn
     local_mount_path = "/mnt/cern_root"
   }
 
@@ -25,10 +25,6 @@ resource "aws_lambda_function" "lambda" {
     subnet_ids         = [var.lambda_subnet]
     security_group_ids = [var.lambda_sg]
   }
-
-  # Explicitly declare dependency on EFS mount target.
-  # When creating or updating Lambda functions, mount target must be in 'available' lifecycle state.
-  depends_on = [aws_efs_mount_target.root_efs_mount]
 }
 
 resource "aws_iam_role" "lambda_role" {

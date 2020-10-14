@@ -12,5 +12,6 @@ variable "tags" {
   type = map
 }
 
+variable "input_bucket" {}
 variable "eos_login" {}
 variable "eos_password" {}

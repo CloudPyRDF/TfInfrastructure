@@ -7,11 +7,11 @@ variable "region" {
 }
 
 variable "eos_lambda_name" {
-  default = "eos_lambda"
+  default = "eos-lambda"
 }
 
 variable "eos_lambda_memory_size" {
-  default = 128
+  default = 1024
 }
 
 variable "eos_lambda_timeout" {
@@ -52,15 +52,15 @@ variable "init_lambda_name" {
 }
 
 variable "init_lambda_memory_size" {
-  default = 128
+  default = 1024
 }
 
 variable "init_lambda_timeout" {
-  default = 120
+  default = 240
 }
 
 variable "init_lambda_pkg_filename" {
-  default = "pkg/init_lambda.zip"
+  default = "pkg/init-lambda.zip"
 }
 
 variable "init_lambda_handler" {
