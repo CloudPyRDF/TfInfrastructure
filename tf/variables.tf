@@ -6,8 +6,12 @@ variable "region" {
   default = "us-east-1"
 }
 
+###########################
+### VARS FOR EOS LAMBDA ###
+###########################
+
 variable "eos_lambda_name" {
-  default = "eos-lambda"
+  default = "eos_lambda"
 }
 
 variable "eos_lambda_memory_size" {
@@ -19,7 +23,7 @@ variable "eos_lambda_timeout" {
 }
 
 variable "eos_lambda_pkg_filename" {
-  default = "pkg/eos-lambda.zip"
+  default = "pkg/eos_lambda.zip"
 }
 
 variable "eos_lambda_handler" {
@@ -43,6 +47,11 @@ variable "eos_lambda_config" {
   }
 }
 
+variable "run_eos" {
+  default = true
+}
+
+
 ################################################
 ### VARS FOR LAMBDA INITIALIZING ROOT ON EFS ###
 ################################################
@@ -52,15 +61,15 @@ variable "init_lambda_name" {
 }
 
 variable "init_lambda_memory_size" {
-  default = 1024
+  default = 1536
 }
 
 variable "init_lambda_timeout" {
-  default = 240
+  default = 900
 }
 
 variable "init_lambda_pkg_filename" {
-  default = "pkg/init-lambda.zip"
+  default = "pkg/init_lambda.zip"
 }
 
 variable "init_lambda_handler" {
@@ -79,6 +88,11 @@ variable "init_lambda_config" {
   }
 }
 
+variable "eos_default_path" {
+  type    = string
+  default = "user/j/jkusnier/AWS_ROOT/"
+}
+
 ####################################
 ### VARS FOR LAMBDA RUNNING ROOT ###
 ####################################
@@ -88,7 +102,7 @@ variable "root_lambda_name" {
 }
 
 variable "root_lambda_memory_size" {
-  default = 128
+  default = 512
 }
 
 variable "root_lambda_timeout" {
@@ -115,3 +129,6 @@ variable "root_lambda_config" {
   }
 }
 
+variable "run_init_root" {
+  default = true
+}

@@ -9,14 +9,6 @@ resource "aws_subnet" "efs_root" {
   cidr_block = "10.0.1.0/24"
 }
 
-# resource "aws_default_subnet" "default_az1" {
-#   availability_zone = var.region
-
-#   tags = {
-#     Name = "Default subnet for us-east-1a"
-#   }
-# }
-
 resource "aws_default_security_group" "default" {
   vpc_id = aws_vpc.main.id
 
@@ -57,8 +49,8 @@ resource "aws_route_table" "r" {
 }
 
 resource "aws_route_table_association" "assoc" {
-  subnet_id      = "${aws_subnet.efs_root.id}"
-  route_table_id = "${aws_route_table.r.id}"
+  subnet_id      = aws_subnet.efs_root.id
+  route_table_id = aws_route_table.r.id
 }
 
 
@@ -68,6 +60,6 @@ resource "aws_vpc_endpoint" "s3" {
 }
 
 resource "aws_vpc_endpoint_route_table_association" "route_table_association" {
-  route_table_id=aws_route_table.r.id
-  vpc_endpoint_id=aws_vpc_endpoint.s3.id
+  route_table_id  = aws_route_table.r.id
+  vpc_endpoint_id = aws_vpc_endpoint.s3.id
 }

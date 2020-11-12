@@ -16,3 +16,4 @@ variable "tags" {
 }
 
 variable "input_bucket" {}
+variable "run" {}

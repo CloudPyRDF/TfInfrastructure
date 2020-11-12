@@ -1,6 +1,5 @@
 variable "pkg_filename" {}
 variable "lambda_name" {}
-# variable "lambda_role" {}
 variable "handler" {}
 variable "memory_size" {}
 variable "timeout" {}
@@ -15,3 +14,5 @@ variable "tags" {
 variable "input_bucket" {}
 variable "eos_login" {}
 variable "eos_password" {}
+variable "eos_default_path" {}
+variable "run" {}
