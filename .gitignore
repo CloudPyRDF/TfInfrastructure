@@ -10,4 +10,5 @@ build/
 .pytest_cache/
 venv
 pkg
-tf/logpass*
+tf/logpass.tfvars
+tf/crash.log

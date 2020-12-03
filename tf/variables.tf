@@ -15,7 +15,7 @@ variable "eos_lambda_name" {
 }
 
 variable "eos_lambda_memory_size" {
-  default = 1024
+  default = 224
 }
 
 variable "eos_lambda_timeout" {
@@ -30,22 +30,23 @@ variable "eos_lambda_handler" {
   default = "lambda.lambda_handler"
 }
 
-variable "eos_login" {
-  type = string
-}
-variable "eos_password" {
-  type = string
-}
 variable "eos_lambda_tags" {
   type    = map
   default = {}
 }
 
 variable "eos_lambda_config" {
-  default = {
-    DEBUG = "false"
-  }
+  type    = map
+  default = { DEBUG = "false" }
 }
+
+variable "eos_default_path" {
+  type    = string
+  default = "user/j/jkusnier/AWS_ROOT/"
+}
+
+variable "eos_login" { type = string }
+variable "eos_password" { type = string }
 
 variable "run_eos" {
   default = true
@@ -82,15 +83,8 @@ variable "init_lambda_tags" {
 }
 
 variable "init_lambda_config" {
-  type = map
-  default = {
-    DEBUG = "false"
-  }
-}
-
-variable "eos_default_path" {
-  type    = string
-  default = "user/j/jkusnier/AWS_ROOT/"
+  type    = map
+  default = { DEBUG = "false" }
 }
 
 ####################################
@@ -123,10 +117,8 @@ variable "root_lambda_tags" {
 }
 
 variable "root_lambda_config" {
-  type = map
-  default = {
-    DEBUG = "false"
-  }
+  type    = map
+  default = { DEBUG = "false" }
 }
 
 variable "run_init_root" {

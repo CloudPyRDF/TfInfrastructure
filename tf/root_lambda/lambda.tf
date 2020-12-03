@@ -25,6 +25,8 @@ resource "aws_lambda_function" "lambda" {
     subnet_ids         = [var.lambda_subnet]
     security_group_ids = [var.lambda_sg]
   }
+
+  depends_on=[var.efs]
 }
 
 resource "aws_iam_role" "lambda_role" {
