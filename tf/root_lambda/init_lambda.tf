@@ -6,7 +6,7 @@ data "aws_lambda_invocation" "run_root" {
   "bucket_name": "${var.input_bucket}"
 }
 JSON
-  depends_on=[var.efs]
+  depends_on    = [var.efs]
 }
 
 output "result_entry" {

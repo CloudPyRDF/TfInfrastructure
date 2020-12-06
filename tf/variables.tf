@@ -69,22 +69,8 @@ variable "init_lambda_timeout" {
   default = 900
 }
 
-variable "init_lambda_pkg_filename" {
-  default = "pkg/init_lambda.zip"
-}
-
-variable "init_lambda_handler" {
-  default = "lambda.lambda_handler"
-}
-
-variable "init_lambda_tags" {
-  type    = map
-  default = {}
-}
-
-variable "init_lambda_config" {
-  type    = map
-  default = { DEBUG = "false" }
+variable "run_init_root" {
+  default = true
 }
 
 ####################################
@@ -103,24 +89,14 @@ variable "root_lambda_timeout" {
   default = 120
 }
 
-variable "root_lambda_pkg_filename" {
-  default = "pkg/root_lambda.zip"
-}
-
-variable "root_lambda_handler" {
-  default = "lambda.lambda_handler"
-}
-
-variable "root_lambda_tags" {
-  type    = map
-  default = {}
-}
-
-variable "root_lambda_config" {
-  type    = map
-  default = { DEBUG = "false" }
-}
-
-variable "run_init_root" {
+variable "run_test_root" {
   default = true
+}
+
+# other
+variable "split_lambda_name" {
+  default = "split_lambda"
+}
+variable "reduce_lambda_name" {
+  default = "reduce_lambda"
 }

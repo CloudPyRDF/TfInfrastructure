@@ -26,7 +26,7 @@ resource "aws_lambda_function" "lambda" {
     security_group_ids = [var.lambda_sg]
   }
 
-  depends_on=[var.efs]
+  depends_on = [var.efs]
 }
 
 resource "aws_iam_role" "lambda_role" {

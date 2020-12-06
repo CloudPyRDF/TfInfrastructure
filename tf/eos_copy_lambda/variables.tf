@@ -11,8 +11,11 @@ variable "tags" {
   type = map
 }
 
+variable "run" {
+  default = false
+}
+
 variable "input_bucket" {}
 variable "eos_login" {}
 variable "eos_password" {}
 variable "eos_default_path" {}
-variable "run" {}

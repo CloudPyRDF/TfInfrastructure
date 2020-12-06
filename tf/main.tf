@@ -2,6 +2,10 @@ resource "null_resource" "prepare_lambda_sources" {
   provisioner "local-exec" {
     command = "./build.sh"
   }
+  provisioner "local-exec" {
+    when    = "destroy"
+    command = "rm -rf pkg"
+  }
 }
 
 
@@ -21,44 +25,17 @@ module "eos_lambda" {
   eos_password     = var.eos_password
   eos_default_path = var.eos_default_path
 
-  run = var.run_eos
-  # run=false
-  
+  # run = var.run_eos
+
   depends_on = [null_resource.prepare_lambda_sources]
 }
 
 module "init_root_lambda" {
-  source       = "./root_lambda"
-  runtime      = "python3.8"
-  pkg_filename = var.init_lambda_pkg_filename
-  lambda_name  = var.init_lambda_name
-  handler      = var.init_lambda_handler
-  memory_size  = var.init_lambda_memory_size
-  timeout      = var.init_lambda_timeout
-  tags         = var.init_lambda_tags
-  config       = var.init_lambda_config
+  source      = "./root_lambda"
+  lambda_name = var.init_lambda_name
 
-  lambda_subnet = aws_subnet.efs_root.id
-  lambda_sg     = aws_default_security_group.default.id
-  input_bucket  = aws_s3_bucket.input_bucket.bucket
-  efs           = aws_efs_access_point.access_point_for_lambda
-
-  run = var.run_init_root
-  # run = false
-
-  depends_on = [module.eos_lambda]
-}
-
-module "root_lambda" {
-  source       = "./root_lambda"
-  runtime      = "python3.8"
-  pkg_filename = var.root_lambda_pkg_filename
-  lambda_name  = var.root_lambda_name
-  handler      = var.root_lambda_handler
-  memory_size  = var.root_lambda_memory_size
-  timeout      = var.root_lambda_timeout
-  tags         = var.root_lambda_tags
-  config       = var.root_lambda_config
+  memory_size = var.init_lambda_memory_size
+  timeout     = var.init_lambda_timeout
 
   lambda_subnet = aws_subnet.efs_root.id
   lambda_sg     = aws_default_security_group.default.id
@@ -66,7 +43,48 @@ module "root_lambda" {
   efs           = aws_efs_access_point.access_point_for_lambda
 
   # run = var.run_init_root
-  run = false
+
+  depends_on = [module.eos_lambda]
+}
+
+module "split_lambda" {
+  source      = "./root_lambda"
+  lambda_name = var.split_lambda_name
+
+  lambda_subnet = aws_subnet.efs_root.id
+  lambda_sg     = aws_default_security_group.default.id
+  input_bucket  = aws_s3_bucket.input_bucket.bucket
+  efs           = aws_efs_access_point.access_point_for_lambda
+
+  # run = var.run_init_root
+
+  depends_on = [module.init_root_lambda]
+}
+
+module "root_lambda" {
+  source      = "./root_lambda"
+  lambda_name = var.root_lambda_name
+
+  lambda_subnet = aws_subnet.efs_root.id
+  lambda_sg     = aws_default_security_group.default.id
+  input_bucket  = aws_s3_bucket.input_bucket.bucket
+  efs           = aws_efs_access_point.access_point_for_lambda
+
+  # run = var.run_init_root
+
+  depends_on = [module.init_root_lambda]
+}
+
+module "reduce_lambda" {
+  source      = "./root_lambda"
+  lambda_name = var.reduce_lambda_name
+
+  lambda_subnet = aws_subnet.efs_root.id
+  lambda_sg     = aws_default_security_group.default.id
+  input_bucket  = aws_s3_bucket.input_bucket.bucket
+  efs           = aws_efs_access_point.access_point_for_lambda
+
+  # run = var.run_init_root
 
   depends_on = [module.init_root_lambda]
 }
