@@ -8,6 +8,17 @@ resource "aws_s3_bucket" "input_bucket" {
   }
 }
 
+resource "aws_s3_bucket" "processing_bucket" {
+  acl           = "private"
+  force_destroy = true
+
+  tags = {
+    Name        = "ROOT Processing Bucket"
+    Environment = "Dev"
+  }
+}
+
+
 resource "aws_s3_bucket" "output_bucket" {
   acl           = "private"
   force_destroy = true

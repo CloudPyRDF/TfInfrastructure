@@ -10,7 +10,7 @@ resource "aws_lambda_function" "lambda" {
 
   environment {
     variables = {
-      DEBUG = "false"
+      bucket = "${var.input_bucket.bucket}"
     }
   }
 
@@ -57,19 +57,9 @@ resource "aws_iam_policy" "lambda_policy" {
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Effect": "Allow",
-      "Action": [
-        "ec2:DescribeNetworkInterfaces",
-        "ec2:CreateNetworkInterface",
-        "ec2:DeleteNetworkInterface",
-        "ec2:DescribeInstances",
-        "ec2:AttachNetworkInterface",
-        "logs:*",
-        "sqs:SendMessage",
-        "s3:*",
-        "kms:Decrypt"
-      ],
-      "Resource": "*"
+        "Action": "*",
+        "Resource": "*",
+        "Effect": "Allow"
     }
   ]
 }

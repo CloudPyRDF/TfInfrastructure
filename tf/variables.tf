@@ -15,11 +15,11 @@ variable "eos_lambda_name" {
 }
 
 variable "eos_lambda_memory_size" {
-  default = 224
+  default = 512
 }
 
 variable "eos_lambda_timeout" {
-  default = 120
+  default = 600
 }
 
 variable "eos_lambda_pkg_filename" {
@@ -33,11 +33,6 @@ variable "eos_lambda_handler" {
 variable "eos_lambda_tags" {
   type    = map
   default = {}
-}
-
-variable "eos_lambda_config" {
-  type    = map
-  default = { DEBUG = "false" }
 }
 
 variable "eos_default_path" {
@@ -82,11 +77,11 @@ variable "root_lambda_name" {
 }
 
 variable "root_lambda_memory_size" {
-  default = 512
+  default = 1024
 }
 
 variable "root_lambda_timeout" {
-  default = 120
+  default = 900
 }
 
 variable "run_test_root" {
@@ -94,9 +89,6 @@ variable "run_test_root" {
 }
 
 # other
-variable "split_lambda_name" {
-  default = "split_lambda"
-}
 variable "reduce_lambda_name" {
   default = "reduce_lambda"
 }

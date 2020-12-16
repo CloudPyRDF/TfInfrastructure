@@ -1,11 +1,7 @@
 data "aws_lambda_invocation" "run_root" {
   count         = var.run ? 1 : 0
   function_name = aws_lambda_function.lambda.function_name
-  input         = <<JSON
-{
-  "bucket_name": "${var.input_bucket}"
-}
-JSON
+  input         = "{}"
   depends_on    = [var.efs]
 }
 

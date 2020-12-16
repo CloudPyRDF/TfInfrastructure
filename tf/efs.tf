@@ -11,7 +11,7 @@ resource "aws_efs_file_system" "root_efs" {
 resource "aws_efs_mount_target" "root_efs_mount" {
   file_system_id  = aws_efs_file_system.root_efs.id
   subnet_id       = aws_subnet.efs_root.id
-  security_groups = [aws_default_security_group.default.id]
+  security_groups = [aws_security_group.default.id]
 }
 
 # EFS access point used by lambda file system

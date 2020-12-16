@@ -9,7 +9,11 @@ resource "aws_lambda_function" "lambda" {
   timeout          = var.timeout
 
   environment {
-    variables = var.config
+    variables = {
+      bucket       = var.input_bucket.bucket
+      eos_login    = var.eos_login
+      eos_password = var.eos_password
+    }
   }
 
   tags = var.tags

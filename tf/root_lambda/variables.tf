@@ -11,11 +11,6 @@ variable "timeout" {
   default = 120
 }
 
-variable "config" {
-  type    = map
-  default = { DEBUG = "false" }
-}
-
 variable "tags" {
   type    = map
   default = {}

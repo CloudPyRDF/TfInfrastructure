@@ -3,9 +3,6 @@ variable "lambda_name" {}
 variable "handler" {}
 variable "memory_size" {}
 variable "timeout" {}
-variable "config" {
-  type = map
-}
 
 variable "tags" {
   type = map

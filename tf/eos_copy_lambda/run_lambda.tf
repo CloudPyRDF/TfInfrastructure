@@ -6,11 +6,6 @@ data "aws_lambda_invocation" "get_sample_data" {
 {
   "eos_path": "${var.eos_default_path}",
   "eos_filename": "aws_root.zip",
-
-  "eos_login": "${var.eos_login}",
-  "eos_password": "${var.eos_password}",
-
-  "s3_bucket_name": "${var.input_bucket}",
   "s3_object_key": "aws_root.zip"
 }
 JSON
