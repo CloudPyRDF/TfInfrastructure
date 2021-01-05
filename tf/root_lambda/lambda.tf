@@ -4,7 +4,7 @@ resource "aws_lambda_function" "lambda" {
   role             = aws_iam_role.lambda_role.arn
   source_code_hash = base64sha256(data.local_file.pkg_file.content)
   handler          = var.handler
-  runtime          = var.runtime
+  runtime          = "python3.8"
   memory_size      = var.memory_size
   timeout          = var.timeout
 
@@ -14,7 +14,7 @@ resource "aws_lambda_function" "lambda" {
     }
   }
 
-  tags = var.tags
+  # tags = var.tags
 
   file_system_config {
     arn              = var.efs.arn
@@ -70,12 +70,12 @@ data "aws_iam_policy" "VPC" {
   arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
 }
 
-resource "aws_iam_role_policy_attachment" "VPC_Attachment" {
+resource "aws_iam_role_policy_attachment" "lambda_VPC" {
   role       = aws_iam_role.lambda_role.name
   policy_arn = data.aws_iam_policy.VPC.arn
 }
 
-resource "aws_iam_role_policy_attachment" "lambda_policy_attachment" {
+resource "aws_iam_role_policy_attachment" "lambda_policy" {
   role       = aws_iam_role.lambda_role.name
   policy_arn = aws_iam_policy.lambda_policy.arn
 }

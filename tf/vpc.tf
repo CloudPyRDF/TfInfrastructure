@@ -13,7 +13,7 @@ resource "aws_subnet" "public" {
   cidr_block              = "10.0.128.0/17"
   map_public_ip_on_launch = true
 }
-resource "aws_route" "primary-internet_access" {
+resource "aws_route" "primary_internet_access" {
   route_table_id         = aws_vpc.main.main_route_table_id
   destination_cidr_block = "0.0.0.0/0"
   gateway_id             = aws_internet_gateway.primary.id

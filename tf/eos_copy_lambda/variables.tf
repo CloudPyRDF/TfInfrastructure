@@ -1,12 +1,14 @@
-variable "pkg_filename" {}
+# variable "pkg_filename" {}
 variable "lambda_name" {}
-variable "handler" {}
+variable "handler" {
+  default = "lambda.lambda_handler"
+}
 variable "memory_size" {}
 variable "timeout" {}
 
-variable "tags" {
-  type = map
-}
+# variable "tags" {
+#   type = map
+# }
 
 variable "run" {
   default = false

@@ -9,6 +9,8 @@ data "aws_lambda_invocation" "get_sample_data" {
   "s3_object_key": "aws_root.zip"
 }
 JSON
+
+  depends_on = [    aws_iam_role_policy_attachment.lambda_policy  ]
 }
 
 output "result_entry" {

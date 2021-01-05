@@ -7,6 +7,7 @@ resource "aws_lambda_function" "lambda" {
   runtime          = "python3.7"
   memory_size      = var.memory_size
   timeout          = var.timeout
+  # tags = var.tags
 
   environment {
     variables = {
@@ -15,8 +16,6 @@ resource "aws_lambda_function" "lambda" {
       eos_password = var.eos_password
     }
   }
-
-  tags = var.tags
 }
 
 
@@ -49,10 +48,7 @@ resource "aws_iam_policy" "lambda_policy" {
     {
       "Effect": "Allow",
       "Action": [
-        "logs:*",
-        "sqs:SendMessage",
-        "s3:*",
-        "kms:Decrypt"
+        "s3:*"
       ],
       "Resource": "*"
     }
@@ -61,7 +57,7 @@ resource "aws_iam_policy" "lambda_policy" {
 EOF
 }
 
-resource "aws_iam_role_policy_attachment" "lambda_policy_attachment" {
+resource "aws_iam_role_policy_attachment" "lambda_policy" {
   role       = aws_iam_role.lambda_role.name
   policy_arn = aws_iam_policy.lambda_policy.arn
 }

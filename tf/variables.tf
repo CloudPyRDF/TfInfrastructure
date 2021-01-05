@@ -22,18 +22,18 @@ variable "eos_lambda_timeout" {
   default = 600
 }
 
-variable "eos_lambda_pkg_filename" {
-  default = "pkg/eos_lambda.zip"
-}
+# variable "eos_lambda_pkg_filename" {
+#   default = "pkg/eos_lambda.zip"
+# }
 
-variable "eos_lambda_handler" {
-  default = "lambda.lambda_handler"
-}
+# variable "eos_lambda_handler" {
+#   default = "lambda.lambda_handler"
+# }
 
-variable "eos_lambda_tags" {
-  type    = map
-  default = {}
-}
+# variable "eos_lambda_tags" {
+#   type    = map
+#   default = {}
+# }
 
 variable "eos_default_path" {
   type    = string
@@ -84,11 +84,11 @@ variable "root_lambda_timeout" {
   default = 900
 }
 
-variable "run_test_root" {
-  default = true
-}
+# variable "run_test_root" {
+#   default = true
+# }
 
 # other
-variable "reduce_lambda_name" {
-  default = "reduce_lambda"
-}
+# variable "reduce_lambda_name" {
+#   default = "reduce_lambda"
+# }

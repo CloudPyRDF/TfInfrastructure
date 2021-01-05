@@ -1,5 +1,3 @@
-
-
 # EFS file system
 resource "aws_efs_file_system" "root_efs" {
   tags = {
