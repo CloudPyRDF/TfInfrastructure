@@ -20,7 +20,7 @@ variable "run" {
 }
 
 variable "lambda_name" {}
-variable "lambda_sg" {}
-variable "lambda_subnet" {}
-variable "efs" {}
+# variable "lambda_sg" {}
+# variable "lambda_subnet" {}
+# variable "efs" {}
 variable "input_bucket" {}

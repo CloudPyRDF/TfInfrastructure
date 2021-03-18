@@ -25,21 +25,21 @@ module "eos" {
   depends_on = [null_resource.prepare_lambda_sources]
 }
 
-module "init" {
-  source      = "./root_lambda"
-  lambda_name = var.init_lambda_name
-  memory_size = var.init_lambda_memory_size
-  timeout     = var.init_lambda_timeout
+# module "init" {
+#   source      = "./root_lambda"
+#   lambda_name = var.init_lambda_name
+#   memory_size = var.init_lambda_memory_size
+#   timeout     = var.init_lambda_timeout
 
-  lambda_subnet = aws_subnet.efs_root.id
-  lambda_sg     = aws_security_group.default.id
-  input_bucket  = aws_s3_bucket.input_bucket
-  efs           = aws_efs_access_point.access_point_for_lambda
+#   lambda_subnet = aws_subnet.efs_root.id
+#   lambda_sg     = aws_security_group.default.id
+#   input_bucket  = aws_s3_bucket.input_bucket
+#   efs           = aws_efs_access_point.access_point_for_lambda
 
-  run = var.run_init_root
+#   run = var.run_init_root
 
-  depends_on = [module.eos]
-}
+#   depends_on = [module.eos]
+# }
 
 module "root" {
   source      = "./root_lambda"
@@ -47,19 +47,19 @@ module "root" {
   memory_size = var.root_lambda_memory_size
   timeout     = var.root_lambda_timeout
 
-  lambda_subnet = aws_subnet.efs_root.id
-  lambda_sg     = aws_security_group.default.id
+  # lambda_subnet = aws_subnet.efs_root.id
+  # lambda_sg     = aws_security_group.default.id
   input_bucket  = aws_s3_bucket.processing_bucket
-  efs           = aws_efs_access_point.access_point_for_lambda
+  # efs           = aws_efs_access_point.access_point_for_lambda
 
   # run = var.run_init_root
 
   depends_on = [
-    module.init,
-    aws_vpc_endpoint_route_table_association.route_table_association,
-    aws_route_table_association.assoc,
-    aws_route_table_association.assoc_pub,
-    aws_route.primary_internet_access
+    module.eos
+    # aws_vpc_endpoint_route_table_association.route_table_association,
+    # aws_route_table_association.assoc,
+    # aws_route_table_association.assoc_pub,
+    # aws_route.primary_internet_access
   ]
 }
 

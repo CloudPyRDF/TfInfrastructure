@@ -40,8 +40,14 @@ variable "eos_default_path" {
   default = "user/j/jkusnier/AWS_ROOT/"
 }
 
-variable "eos_login" { type = string }
-variable "eos_password" { type = string }
+variable "eos_login" { 
+  type = string
+ default="a" 
+ }
+variable "eos_password" {
+   type = string
+ default="b"
+ }
 
 variable "run_eos" {
   default = true
