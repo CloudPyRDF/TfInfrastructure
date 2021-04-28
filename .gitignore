@@ -12,3 +12,4 @@ venv
 pkg
 tf/logpass.tfvars
 tf/crash.log
+tf/.terraform.lock.*

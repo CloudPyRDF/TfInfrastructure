@@ -10,7 +10,7 @@ data "aws_lambda_invocation" "get_sample_data" {
 }
 JSON
 
-  depends_on = [    aws_iam_role_policy_attachment.lambda_policy  ]
+  depends_on = [aws_iam_role_policy_attachment.lambda_policy]
 }
 
 output "result_entry" {

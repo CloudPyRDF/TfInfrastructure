@@ -1,26 +1,24 @@
-# variable "runtime" {
-#   default = "python3.8"
-# }
+
 variable "handler" {
   default = "lambda.lambda_handler"
 }
+
 variable "memory_size" {
-  default = 512
-}
-variable "timeout" {
-  default = 120
+  default = 1536
 }
 
-# variable "tags" {
-#   type    = map
-#   default = {}
-# }
+variable "timeout" {
+  default = 900
+}
+
 variable "run" {
   default = false
 }
 
-variable "lambda_name" {}
-# variable "lambda_sg" {}
-# variable "lambda_subnet" {}
-# variable "efs" {}
+variable "lambda_name" {
+  default = "root_lambda"
+}
+
 variable "input_bucket" {}
+
+variable "image_uri" {}
