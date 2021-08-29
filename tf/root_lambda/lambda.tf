@@ -15,10 +15,10 @@ resource "aws_lambda_function" "lambda" {
 
   image_config {
     entry_point = [
-      "sh", "-c",
-      ". /mnt/cern_root/root_install/bin/thisroot.sh && python3 -m awslambdaric lambda.lambda_handler"
+      "bash", "-c",
+      "source /usr/local/bin/thisroot.sh && python3 -m awslambdaric lambda.lambda_handler"
     ]
-    working_directory = "/mnt/cern_root/root_install/PyRDF"
+    working_directory = "/usr/local"
   }
 }
 

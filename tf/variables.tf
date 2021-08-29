@@ -31,7 +31,6 @@ variable "eos_login" {
   type    = string
   default = "a"
 }
-
 variable "eos_password" {
   type    = string
   default = "b"
@@ -39,6 +38,19 @@ variable "eos_password" {
 
 variable "run_eos" {
   default = true
+}
+
+
+################################################
+### VARS FOR LAMBDA INITIALIZING ROOT ON EFS ###
+################################################
+
+variable "init_lambda_name" {
+  default = "init_lambda"
+}
+
+variable "init_lambda_memory_size" {
+  default = 1536
 }
 
 ####################################
@@ -63,4 +75,17 @@ variable "root_lambda_memory_size" {
 
 variable "root_lambda_timeout" {
   default = 900
+}
+
+# variable "run_test_root" {
+#   default = true
+# }
+
+# other
+# variable "reduce_lambda_name" {
+#   default = "reduce_lambda"
+# }
+
+variable "root_docker_image_repository_url" {
+  default = "public.ecr.aws/u1r6s2k6/root_lambda"
 }
