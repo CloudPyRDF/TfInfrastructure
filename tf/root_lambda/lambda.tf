@@ -9,7 +9,8 @@ resource "aws_lambda_function" "lambda" {
 
   environment {
     variables = {
-      bucket = var.input_bucket.bucket
+      bucket     = var.input_bucket.bucket
+      KRB5CCNAME = "/tmp/certs"
     }
   }
 
