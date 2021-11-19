@@ -26,7 +26,7 @@ module "root" {
   lambda_name  = var.root_lambda_name
   memory_size  = var.root_lambda_memory_size
   timeout      = var.root_lambda_timeout
-#  image_uri    = var.root_image_uri
+  root_image_uri = var.root_image_uri
   input_bucket = aws_s3_bucket.processing_bucket
 
 #  depends_on = [

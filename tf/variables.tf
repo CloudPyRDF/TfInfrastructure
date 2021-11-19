@@ -64,9 +64,9 @@ variable "root_lambda_name" {
 ## Create terraform.tfvars file with:
 # root_image_uri = "${url_to_private_ecr_repo}"
 ## to run this
-#variable "root_image_uri" {
-#
-#}
+variable "root_image_uri" {
+
+}
 
 variable "root_lambda_memory_size" {
   # per https://docs.aws.amazon.com/lambda/latest/dg/configuration-memory.html

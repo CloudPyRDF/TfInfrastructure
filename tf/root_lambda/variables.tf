@@ -19,4 +19,6 @@ variable "lambda_name" {
   default = "root_lambda"
 }
 
+variable "root_image_uri" {}
+
 variable "input_bucket" {}
