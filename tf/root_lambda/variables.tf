@@ -20,5 +20,3 @@ variable "lambda_name" {
 }
 
 variable "input_bucket" {}
-
-variable "image_uri" {}

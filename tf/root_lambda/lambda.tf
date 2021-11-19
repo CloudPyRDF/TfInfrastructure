@@ -1,7 +1,7 @@
 resource "aws_lambda_function" "lambda" {
   # filename         = data.local_file.pkg_file.filename
   package_type  = "Image"
-  image_uri     = var.image_uri
+  image_uri     = "${aws_ecr_repository.root_worker.repository_url}:latest"
   function_name = var.lambda_name
   role          = aws_iam_role.lambda_role.arn
   memory_size   = var.memory_size
@@ -21,6 +21,8 @@ resource "aws_lambda_function" "lambda" {
     ]
     working_directory = "/usr/local"
   }
+
+  depends_on = [aws_ecr_repository.root_worker]
 }
 
 resource "aws_iam_role" "lambda_role" {

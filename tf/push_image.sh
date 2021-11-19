@@ -1,3 +1,7 @@
+#!/bin/bash
+
+set -e
+set -o pipefail
 
 ecr_name=$1
 
