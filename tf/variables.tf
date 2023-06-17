@@ -2,7 +2,8 @@ variable "profile" {
   default = "default"
 }
 
-variable "region" {
+variable "aws_region" {
+  type = string
   default = "us-east-1"
 }
 
@@ -25,4 +26,8 @@ variable "root_lambda_timeout" {
 
 variable "root_docker_image_repository_url" {
   default = "public.ecr.aws/u1r6s2k6/root_lambda"
+}
+
+variable "lambda_role_arn" {
+  default = ""
 }

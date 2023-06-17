@@ -1,6 +1,6 @@
 provider "aws" {
   profile = var.profile
-  region  = var.region
+  region  = var.aws_region
 
   # Make it faster by skipping something
   skip_metadata_api_check     = true

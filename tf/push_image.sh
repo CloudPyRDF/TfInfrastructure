@@ -5,12 +5,11 @@ set -o pipefail
 
 ecr_name=$1
 root_image_uri=$2
+region=$3
+aws="docker run --rm -i -v ${HOME}/.aws:/root/.aws:ro amazon/aws-cli:2.8.7"
+aws_account_id=`${aws} sts get-caller-identity | grep "Account" | sed 's/[^0-9]//g'`
 
-AWS_DEFAULT_REGION=us-east-1
-aws_account_id=`aws sts get-caller-identity | grep "Account" | sed 's/[^0-9]//g'`
-region=`aws configure get region || echo ${AWS_DEFAULT_REGION}`
-
-aws ecr get-login-password --region ${region} | docker login --username AWS --password-stdin ${aws_account_id}.dkr.ecr.${region}.amazonaws.com
+docker login --username AWS --password $(${aws} ecr get-login-password --region ${region}) ${aws_account_id}.dkr.ecr.${region}.amazonaws.com
 
 docker pull ${root_image_uri}
 
