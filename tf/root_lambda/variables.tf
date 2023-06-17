@@ -21,4 +21,4 @@ variable "lambda_name" {
 
 variable "root_image_uri" {}
 
-variable "input_bucket" {}
+variable "processing_bucket" {}

@@ -1,5 +1,4 @@
 resource "aws_lambda_function" "lambda" {
-  # filename         = data.local_file.pkg_file.filename
   package_type  = "Image"
   image_uri     = "${aws_ecr_repository.root_worker.repository_url}:latest"
   function_name = var.lambda_name
@@ -9,7 +8,7 @@ resource "aws_lambda_function" "lambda" {
 
   environment {
     variables = {
-      bucket     = var.input_bucket.bucket
+      bucket     = var.processing_bucket.bucket
       KRB5CCNAME = "/tmp/certs"
     }
   }

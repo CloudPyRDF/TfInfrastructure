@@ -1,5 +1,0 @@
-{
-    'url':'http://www.google.com'
-    'bucket_name':bucket_name
-    'object_key':path_in_bucket
-}
