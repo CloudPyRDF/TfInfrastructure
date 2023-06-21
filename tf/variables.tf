@@ -7,7 +7,7 @@ variable "aws_region" {
   default = "us-east-1"
 }
 
-variable "root_lambda_name" {
+variable "lambda_name" {
   default = "root_lambda"
 }
 

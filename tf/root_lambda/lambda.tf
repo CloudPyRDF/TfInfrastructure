@@ -1,7 +1,7 @@
-resource "aws_lambda_function" "lambda" {
+resource "aws_lambda_function" "worker_lambda" {
   package_type  = "Image"
-  image_uri     = "${aws_ecr_repository.root_worker.repository_url}:latest"
-  function_name = var.lambda_name
+  image_uri     = "${aws_ecr_repository.root_repository.repository_url}:worker"
+  function_name = "worker_${var.lambda_name}"
   role          = var.lambda_role_arn == "" ? aws_iam_role.lambda_role[0].arn : var.lambda_role_arn
   memory_size   = var.memory_size
   timeout       = var.timeout
@@ -22,8 +22,61 @@ resource "aws_lambda_function" "lambda" {
     working_directory = "/opt"
   }
 
-  depends_on = [aws_ecr_repository.root_worker]
+  depends_on = [aws_ecr_repository.root_repository]
 }
+
+resource "aws_lambda_function" "replicator_lambda" {
+  package_type  = "Image"
+  image_uri     = "${aws_ecr_repository.root_repository.repository_url}:replicator"
+  function_name = "replicator_${var.lambda_name}"
+  role          = var.lambda_role_arn == "" ? aws_iam_role.lambda_role[0].arn : var.lambda_role_arn
+  memory_size   = var.memory_size
+  timeout       = var.timeout
+
+  environment {
+    variables = {
+      bucket     = var.processing_bucket.bucket
+      KRB5CCNAME = "/tmp/certs"
+      XRD_NETWORKSTACK = "IPv4"
+    }
+  }
+
+  image_config {
+    entry_point = [
+      "bash", "-c",
+      "python3 -m awslambdaric lambda.lambda_handler"
+    ]
+    working_directory = "/opt"
+  }
+
+  depends_on = [aws_ecr_repository.root_repository]
+}
+
+resource "aws_lambda_function" "reducer_lambda" {
+  package_type  = "Image"
+  image_uri     = "${aws_ecr_repository.root_repository.repository_url}:reducer"
+  function_name = "reducer_${var.lambda_name}"
+  role          = var.lambda_role_arn == "" ? aws_iam_role.lambda_role[0].arn : var.lambda_role_arn
+  memory_size   = var.memory_size
+  timeout       = var.timeout
+
+  environment {
+    variables = {
+      bucket     = var.processing_bucket.bucket
+    }
+  }
+
+  image_config {
+    entry_point = [
+      "bash", "-c",
+      "python3 -m awslambdaric lambda.lambda_handler"
+    ]
+    working_directory = "/opt"
+  }
+
+  depends_on = [aws_ecr_repository.root_repository]
+}
+
 
 resource "aws_iam_role" "lambda_role" {
   count = var.lambda_role_arn == "" ? 1 : 0
